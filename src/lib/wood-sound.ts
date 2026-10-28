@@ -19,7 +19,8 @@ export function playWoodSound() {
 
 function tap(context: AudioContext) {
   const time = context.currentTime;
-  for (const [frequency, volume] of [[480, 0.16], [830, 0.08], [1370, 0.035]]) {
+  const tones: Array<[number, number]> = [[480, 0.16], [830, 0.08], [1370, 0.035]];
+  for (const [frequency, volume] of tones) {
     const oscillator = context.createOscillator();
     const gain = context.createGain();
     oscillator.type = "sine";
