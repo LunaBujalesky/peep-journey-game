@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Peep's image buttons use the shared Button component and CDN asset pointers to preserve supplied artwork and accessible actions.
+- Wooden interaction audio is synthesized client-side after a user gesture because browsers restrict autoplay.
