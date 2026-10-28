@@ -142,3 +142,37 @@
     color: var(--color-foreground);
   }
 }
+
+/* ===== Peep intro scene ===== */
+:root {
+  --scene-bg: #e7e8da;
+  --tree-green: #06403c;
+  --peep-cream: oklch(0.97 0.03 95);
+  --peep-pink: oklch(0.85 0.08 0);
+  --font-display: "Gluten", "Fredoka", cursive;
+  --font-body: "Fredoka", system-ui, sans-serif;
+}
+.scene { position: relative; height: 100vh; width: 100%; overflow: hidden; background: var(--scene-bg); font-family: var(--font-body); }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.layer-forest { clip-path: inset(100% 0 0 0); animation: sweep-up 1.6s cubic-bezier(.7,0,.2,1) .5s forwards; }
+.layer-pink { opacity: 0; transform: translateY(-40%); filter: blur(12px); animation: clouds-down 2s ease-out 2s forwards; }
+.layer-particles { opacity: 0; animation: fade-in 1.5s ease 3.6s forwards; }
+.dust { animation: drift 10s ease-in-out infinite alternate; }
+.mote { position: absolute; border-radius: 9999px; background: var(--peep-cream); box-shadow: 0 0 10px 3px color-mix(in oklab, var(--peep-cream) 70%, transparent); animation: float 7s ease-in-out infinite; }
+.layer-trees { transform: translateY(100%); animation: slide-up 1.4s cubic-bezier(.2,.8,.2,1) 4.6s forwards; }
+.hero { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+.logo { font-family: var(--font-display); font-weight: 800; font-size: clamp(5rem, 16vw, 13rem); line-height: 1; color: var(--tree-green); text-shadow: 0 6px 0 var(--peep-pink), 0 20px 50px color-mix(in oklab, var(--tree-green) 35%, transparent); transform: scale(0); opacity: 0; animation: zoom-in 1.1s cubic-bezier(.34,1.56,.64,1) 6s forwards; }
+.menu { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+.game-btn { opacity: 0; transform: translateY(20px); animation: rise 0.6s ease forwards; padding: .9rem 2.2rem; border-radius: 9999px; font-weight: 600; font-size: 1.15rem; letter-spacing: .03em; color: var(--tree-green); background: color-mix(in oklab, var(--peep-cream) 85%, transparent); border: 2px solid var(--tree-green); backdrop-filter: blur(6px); transition: transform .2s, background .2s, color .2s; }
+.game-btn:nth-child(1) { animation-delay: 7s; } .game-btn:nth-child(2) { animation-delay: 7.15s; } .game-btn:nth-child(3) { animation-delay: 7.3s; }
+.game-btn:hover { background: var(--tree-green); color: var(--peep-cream); transform: translateY(-3px); }
+.game-btn-primary { background: var(--tree-green); color: var(--peep-cream); }
+.game-btn-primary:hover { background: var(--peep-pink); color: var(--tree-green); }
+@keyframes sweep-up { to { clip-path: inset(0 0 0 0); } }
+@keyframes clouds-down { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+@keyframes fade-in { to { opacity: 1; } }
+@keyframes slide-up { to { transform: translateY(0); } }
+@keyframes zoom-in { 0% { transform: scale(0); opacity: 0; } 60% { opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes rise { to { opacity: 1; transform: translateY(0); } }
+@keyframes float { 0%,100% { transform: translate(0,0); opacity: .3; } 50% { transform: translate(14px,-40px); opacity: 1; } }
+@keyframes drift { from { transform: translate(0,0); } to { transform: translate(-20px,-30px); } }
