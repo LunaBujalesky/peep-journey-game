@@ -167,8 +167,8 @@
 .logo-wrap { position: relative; width: min(620px, 70vw); }
 .logo { width: 100%; margin: 0; transform: scale(0); opacity: 0; animation: zoom-in 1.1s cubic-bezier(.34,1.56,.64,1) 6s forwards; }
 .logo img { display: block; width: 100%; height: auto; }
-.pepe-bird { position: absolute; left: 62%; top: -6%; width: 17%; opacity: 0; transform-origin: 50% 90%; animation: fade-in .7s ease 6.8s forwards, sway 3.2s ease-in-out 7.5s infinite; pointer-events: none; }
-.bandera-flag { position: absolute; left: 47%; top: -14%; width: 9%; opacity: 0; transform-origin: 30% 95%; animation: fade-in .7s ease 7.1s forwards, wave 2.6s ease-in-out 7.8s infinite; pointer-events: none; }
+.pepe-bird { position: absolute; left: 63%; top: 6%; width: 15%; opacity: 0; transform-origin: 50% 90%; animation: fade-in .7s ease 6.8s forwards, sway 3.2s ease-in-out 7.5s infinite; pointer-events: none; }
+.bandera-flag { position: absolute; left: 48%; top: -4%; width: 8%; opacity: 0; transform-origin: 30% 95%; animation: fade-in .7s ease 7.1s forwards, wave 2.6s ease-in-out 7.8s infinite; pointer-events: none; }
 .menu { display: flex; flex-direction: column; align-items: center; gap: 22px; width: min(640px, 100%); margin-top: -24px; }
 .menu-row { display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%; opacity: 0; animation: rise .6s ease forwards; }
 .menu-row-primary { animation-delay: 7s; }
