@@ -189,15 +189,15 @@
 .peep-dialog-raw { background: transparent; border: 0; box-shadow: none; padding: 0; width: min(950px, 94vw, 130dvh); max-width: none; gap: 0; }
 .teaser-artwork, .team-book { position: relative; width: 100%; }
 .teaser-preview, .book-background { display: block; width: 100%; height: auto; }
-.teaser-video { position: absolute; left: 9%; top: 15%; width: 82%; height: 70%; border: 0; background: var(--tree-green); }
-.close-leaf { position: absolute; top: 3%; right: 4%; width: 5.5%; padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 3; }
+.teaser-video { position: absolute; left: 10.1%; top: 19.2%; width: 77.8%; height: 71.6%; border: 0; background: var(--tree-green); }
+.close-leaf { position: absolute; top: 20%; right: 6%; width: 5.5%; padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 3; }
 .close-coin { position: absolute; right: 2%; top: 44%; width: 6.8%; z-index: 3; }
 .close-coin:hover, .close-coin:focus-visible { transform: rotate(18deg) scale(1.08); }
 .team-card { position: absolute; top: 6.8%; width: 18%; transform-origin: 50% 0; white-space: normal; }
 .team-card img { display: block; width: 100%; height: auto; }
 .team-card-diego { left: 16%; }
 .team-card-clara { left: 30%; top: 7.1%; }
-.team-card-luna { left: 47%; top: 7.2%; }
+.team-card-luna { left: 47%; top: 7.2%; z-index: 1; }
 .team-card-silvi { left: 53.4%; top: 7.2%; }
 .team-card-aye { left: 64.8%; top: 7.4%; }
 .team-card:hover, .team-card:focus-visible { z-index: 2; animation: card-swing 1.7s ease-in-out infinite; }
