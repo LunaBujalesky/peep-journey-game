@@ -8,12 +8,13 @@ import plataformasDerecha from "@/assets/plataformas-derecha.png.asset.json";
 import mochis from "@/assets/mochis.png.asset.json";
 import pepe from "@/assets/pepe.png.asset.json";
 import bandera from "@/assets/bandera.png.asset.json";
-import coleccionables from "@/assets/coleccionables.png.asset.json";
-import botonCerrar from "@/assets/boton-cerrar.svg.asset.json";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
-import { playWoodSound, playLeavesSound } from "@/lib/wood-sound";
+import { playWoodSound } from "@/lib/wood-sound";
+import { Volume2, VolumeX } from "lucide-react";
+import { useMenuMusic } from "@/hooks/use-menu-music";
+import { PeepModal } from "@/components/peep/peep-modal";
+import type { PeepModal as Modal } from "@/lib/peep-media";
 import logo from "@/assets/peep-logo.svg.asset.json";
 import tryNow from "@/assets/try-now.png.asset.json";
 import instagram from "@/assets/instagram.png.asset.json";
@@ -22,10 +23,10 @@ import discord from "@/assets/discord.png.asset.json";
 import teaserButton from "@/assets/teaser-button.png.asset.json";
 import presskitButton from "@/assets/presskit-button.png.asset.json";
 import teamButton from "@/assets/team-button.png.asset.json";
-import teaserPreview from "@/assets/teaser-preview.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    links: [{ rel: "preload", as: "image", href: bosque.url }],
     meta: [
       { title: "Peep — El videojuego" },
       { name: "description", content: "Adentrate en el bosque de Peep, una aventura mágica entre árboles gigantes y luz rosa." },
@@ -39,22 +40,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [modal, setModal] = useState<"unavailable" | "teaser" | "team" | null>(null);
+  const [modal, setModal] = useState<Modal>(null);
+  const music = useMenuMusic(modal);
   const soundEvents = { onPointerEnter: playWoodSound, onFocus: playWoodSound, onPointerDown: playWoodSound };
-  const isImageModal = modal === "teaser" || modal === "team";
-  const leafClose = (
-    <DialogClose asChild>
-      <button
-        type="button"
-        className="close-leaf"
-        aria-label="Cerrar"
-        onPointerEnter={playLeavesSound}
-        onFocus={playLeavesSound}
-      >
-        <img src={botonCerrar.url} alt="" />
-      </button>
-    </DialogClose>
-  );
   return (
     <main className="scene">
       <img src={bosque.url} alt="" className="layer layer-forest" />
@@ -68,6 +56,7 @@ function Index() {
         <img src={plataformasDerecha.url} alt="" className="layer" />
       </div>
       <img src={mochis.url} alt="" className="layer layer-mochis" />
+      <Button variant="ghost" size="icon" className="music-toggle" aria-label={music.enabled ? "Silenciar música" : "Activar música"} title={music.enabled ? "Silenciar música" : "Activar música"} aria-pressed={music.enabled} onClick={music.toggle}>{music.enabled ? <Volume2 /> : <VolumeX />}</Button>
 
       <div className="hero">
         <div className="logo-wrap">
@@ -91,21 +80,7 @@ function Index() {
           </div>
         </nav>
       </div>
-      <Dialog open={modal !== null} onOpenChange={(open) => { if (!open) setModal(null); }}>
-        <DialogContent
-          className={isImageModal ? "peep-dialog-raw" : "peep-dialog"}
-          closeButton={isImageModal ? leafClose : undefined}
-        >
-          <DialogTitle className={isImageModal ? "sr-only" : "peep-dialog-title"}>
-            {modal === "teaser" ? "Teaser" : modal === "team" ? "Team" : "Ups"}
-          </DialogTitle>
-          <DialogDescription className={isImageModal ? "sr-only" : "peep-dialog-copy"}>
-            {modal === "teaser" ? "Una mirada al mundo de Peep." : modal === "team" ? "El equipo de Dead Time Games." : "Aún no se encuentra disponible."}
-          </DialogDescription>
-          {modal === "teaser" && <img className="teaser-preview" src={teaserPreview.url} alt="Teaser de Peep: aventura entre árboles y plataformas del bosque" />}
-          {modal === "team" && <img className="teaser-preview" src={coleccionables.url} alt="Libro de coleccionables con las credenciales del equipo de Dead Time Games" />}
-        </DialogContent>
-      </Dialog>
+      <PeepModal modal={modal} onClose={() => setModal(null)} />
     </main>
   );
 }

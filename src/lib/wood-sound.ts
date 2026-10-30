@@ -34,6 +34,32 @@ export function playLeavesSound() {
   }
 }
 
+function playTones(tones: ReadonlyArray<readonly [number, number, number]>, duration: number) {
+  try {
+    audio ??= new AudioContext();
+    const context = audio;
+    const play = () => {
+      if (context.state !== "running") return;
+      for (const [frequency, volume, delay] of tones) {
+        const time = context.currentTime + delay;
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        oscillator.frequency.value = frequency;
+        gain.gain.setValueAtTime(volume, time);
+        gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+        oscillator.connect(gain).connect(context.destination);
+        oscillator.start(time);
+        oscillator.stop(time + duration);
+      }
+    };
+    if (context.state === "suspended") void context.resume().then(play);
+    else play();
+  } catch { /* Respect browsers with audio disabled. */ }
+}
+
+export const playCoinSound = () => playTones([[2400, 0.07, 0], [3650, 0.035, 0.02], [5100, 0.018, 0]], 0.35);
+export const playPlasticSound = () => playTones([[1450, 0.04, 0], [2100, 0.025, 0.05], [1700, 0.03, 0.11]], 0.045);
+
 function rustle(context: AudioContext) {
   const time = context.currentTime;
   const length = Math.floor(context.sampleRate * 0.28);
