@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { copy, localeHead, type Locale } from "@/lib/i18n";
 import bosque from "@/assets/bosque.png.asset.json";
 import rosa from "@/assets/luz-rosa.png.asset.json";
 import polvo from "@/assets/polvo-capa.png.asset.json";
@@ -25,26 +26,17 @@ import presskitButton from "@/assets/presskit-button.png.asset.json";
 import teamButton from "@/assets/team-button.png.asset.json";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    links: [{ rel: "preload", as: "image", href: bosque.url }],
-    meta: [
-      { title: "Peep — El videojuego" },
-      { name: "description", content: "Adentrate en el bosque de Peep, una aventura mágica entre árboles gigantes y luz rosa." },
-      { property: "og:title", content: "Peep — El videojuego" },
-      { property: "og:description", content: "Adentrate en el bosque de Peep, una aventura mágica entre árboles gigantes y luz rosa." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: Index,
+  head: () => localeHead("es", bosque.url),
+  component: () => <PeepHome locale="es" />,
 });
 
-function Index() {
+export function PeepHome({ locale }: { locale: Locale }) {
+  const t = copy[locale];
   const [modal, setModal] = useState<Modal>(null);
   const music = useMenuMusic(modal);
   const soundEvents = { onPointerEnter: playWoodSound, onFocus: playWoodSound, onPointerDown: playWoodSound };
   return (
-    <main className="scene">
+    <main className="scene" lang={locale}>
       <img src={bosque.url} alt="" className="layer layer-forest" />
       <img src={rosa.url} alt="" className="layer layer-pink" />
       <div className="layer layer-particles">
@@ -56,17 +48,17 @@ function Index() {
         <img src={plataformasDerecha.url} alt="" className="layer" />
       </div>
       <img src={mochis.url} alt="" className="layer layer-mochis" />
-      <Button variant="ghost" size="icon" className="music-toggle" aria-label={music.enabled ? "Silenciar música" : "Activar música"} title={music.enabled ? "Silenciar música" : "Activar música"} aria-pressed={music.enabled} onClick={music.toggle}>{music.enabled ? <Volume2 /> : <VolumeX />}</Button>
+      <Button variant="ghost" size="icon" className="music-toggle" aria-label={music.enabled ? t.musicOff : t.musicOn} title={music.enabled ? t.musicOff : t.musicOn} aria-pressed={music.enabled} onClick={music.toggle}>{music.enabled ? <Volume2 /> : <VolumeX />}</Button>
 
       <div className="hero">
         <div className="logo-wrap">
-          <h1 className="logo"><img src={logo.url} alt="Peep" /></h1>
+          <h1 className="logo"><img src={logo.url} alt={t.logoAlt} /></h1>
           <img src={pepe.url} alt="" className="pepe-bird" />
           <img src={bandera.url} alt="" className="bandera-flag" />
         </div>
-        <nav className="menu" aria-label="Peep">
+        <nav className="menu" aria-label={t.nav}>
           <div className="menu-row menu-row-primary">
-            <Button variant="ghost" className="asset-button try-button" aria-label="Try Now" {...soundEvents} onClick={() => setModal("unavailable")}><img src={tryNow.url} alt="Try Now!" /></Button>
+            <Button variant="ghost" className="asset-button try-button" aria-label={t.tryNow} {...soundEvents} onClick={() => setModal("unavailable")}><img src={tryNow.url} alt="" /></Button>
             <div className="social-buttons">
               <Button asChild variant="ghost" className="asset-button round-button" {...soundEvents}><a href="https://www.instagram.com/peep_journey_game/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src={instagram.url} alt="" /></a></Button>
               <Button variant="ghost" className="asset-button round-button" aria-label="Steam" {...soundEvents} onClick={() => setModal("unavailable")}><img src={steam.url} alt="" /></Button>
@@ -80,7 +72,7 @@ function Index() {
           </div>
         </nav>
       </div>
-      <PeepModal modal={modal} onClose={() => setModal(null)} />
+      <PeepModal t={t} modal={modal} onClose={() => setModal(null)} />
     </main>
   );
 }
