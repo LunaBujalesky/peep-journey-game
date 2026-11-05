@@ -10,11 +10,11 @@ import { playPlasticSound } from "@/lib/wood-sound";
 
 const cards = { diego, clara, luna, silvi, aye };
 
-export function TeamBook() {
+export function TeamBook({ profileLabel }: { profileLabel: string }) {
   return <div className="team-book">
     <img className="book-background" src={book.url} alt="Libro de Dead Time Games" width={1717} height={1069} />
     {teamProfiles.map(member => <Button key={member.id} asChild variant="ghost" className={`asset-button team-card team-card-${member.id}`} onPointerEnter={playPlasticSound} onFocus={playPlasticSound}>
-      <a href={member.href} target="_blank" rel="noopener noreferrer" aria-label={`Perfil de ${member.name}`}>
+      <a href={member.href} target="_blank" rel="noopener noreferrer" aria-label={`${profileLabel} ${member.name}`}>
         <img src={cards[member.id].url} alt={`${member.name} — Dead Time Games`} draggable={false} />
       </a>
     </Button>)}
