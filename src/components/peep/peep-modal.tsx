@@ -6,6 +6,7 @@ import teaser from "@/assets/teaser-preview.png.asset.json";
 import { playCoinSound, playLeavesSound } from "@/lib/wood-sound";
 import type { PeepModal as Modal } from "@/lib/peep-media";
 import { TeamBook } from "./team-book";
+import { Smartphone } from "lucide-react";
 
 export function PeepModal({ modal, onClose }: { modal: Modal; onClose: () => void }) {
   const illustrated = modal === "teaser" || modal === "team";
@@ -13,11 +14,12 @@ export function PeepModal({ modal, onClose }: { modal: Modal; onClose: () => voi
   const sound = team ? playCoinSound : playLeavesSound;
   return <Dialog open={modal !== null} onOpenChange={open => { if (!open) onClose(); }}>
     <DialogContent className={illustrated ? `peep-dialog-raw ${team ? "team-dialog" : "teaser-dialog"}` : "peep-dialog"}
-      closeButton={illustrated ? <DialogClose asChild><Button variant="ghost" className={`asset-button ${team ? "close-coin" : "close-leaf"}`} aria-label="Cerrar" onPointerEnter={sound} onFocus={sound} onPointerDown={sound}><img src={team ? coin.url : leaf.url} alt="" /></Button></DialogClose> : undefined}>
+      closeButton={illustrated ? <DialogClose asChild><Button variant="ghost" className={`asset-button ${team ? "close-coin" : "close-leaf"}`} style={team ? { ["--coin-mask" as string]: `url(${coin.url})` } : undefined} aria-label="Cerrar" onPointerEnter={sound} onFocus={sound} onPointerDown={sound}><img src={team ? coin.url : leaf.url} alt="" /></Button></DialogClose> : undefined}>
       <DialogTitle className={illustrated ? "sr-only" : "peep-dialog-title"}>{team ? "Team" : modal === "teaser" ? "Teaser" : "Ups"}</DialogTitle>
       <DialogDescription className={illustrated ? "sr-only" : "peep-dialog-copy"}>{team ? "El equipo de Dead Time Games." : modal === "teaser" ? "Una mirada al mundo de Peep." : "Aún no se encuentra disponible."}</DialogDescription>
       {modal === "teaser" && <div className="teaser-artwork"><img src={teaser.url} alt="Teaser de Peep" width={950} className="teaser-preview" /><iframe className="teaser-video" title="Video Teaser de Peep" src="https://drive.google.com/file/d/17UVS0plncBS3IY7W-SNIbAYIQIEkSqf4/preview" allow="autoplay; fullscreen" allowFullScreen /></div>}
       {team && <TeamBook />}
+      {illustrated && <p className="rotate-hint"><Smartphone aria-hidden size={20} />Girá el celular para verlo mejor</p>}
     </DialogContent>
   </Dialog>;
 }
