@@ -24,3 +24,14 @@ describe("Team card destinations", () => {
     expect(teamProfiles[index]?.href).toBe(href);
   });
 });
+import { localeFromPath, localeHead } from "@/lib/i18n";
+describe("international SEO", () => {
+  it("maps each URL to its language", () => {
+    expect(["/", "/en", "/zh-cn", "/ko"].map(localeFromPath)).toEqual(["es", "en", "zh-Hans", "ko"]);
+  });
+  it("gives each language a self canonical and reciprocal hreflang", () => {
+    const head = localeHead("ko", "x");
+    expect(head.links.find(l => l.rel === "canonical")?.href).toBe("/ko");
+    expect(head.links.filter(l => l.rel === "alternate").map(l => l.hrefLang)).toEqual(["es", "en", "zh-Hans", "ko", "x-default"]);
+  });
+});
