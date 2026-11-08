@@ -213,11 +213,11 @@
 .team-card-aye { left: 64.8%; top: 7.4%; }
 .team-card:hover, .team-card:focus-visible { z-index: 2; animation: card-swing 1.7s ease-in-out infinite; }
 .top-controls { position: absolute; top: 14px; right: 16px; z-index: 20; display: flex; align-items: center; gap: 8px; }
-.sound-button { width: 52px; height: 52px; }
+.sound-button { width: 60px; height: 60px; }
 .sound-button:hover img { transform: scale(.92); }
-.language-leaf { position: relative; width: 74px; height: 82px; perspective: 400px; }
+.language-leaf { position: relative; width: 92px; height: 102px; perspective: 400px; }
 .language-leaf img, .language-leaf span { transform-origin: 20% 80%; }
-.language-leaf span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 18% 8% 0 0; font-family: "Patrick Hand", cursive; font-weight: 400; font-size: 22px; line-height: 1; color: var(--peep-cream, #EFEADD); pointer-events: none; white-space: nowrap; }
+.language-leaf span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 18% 8% 0 0; font-family: "Patrick Hand", cursive; font-weight: 400; font-size: 27px; line-height: 1; color: var(--peep-cream); pointer-events: none; white-space: nowrap; }
 .language-leaf:hover img { animation: wiggle .5s ease-in-out infinite; }
 .leaf-out img, .leaf-out span { animation: leaf-turn-out .28s ease-in forwards !important; }
 .leaf-in img, .leaf-in span { animation: leaf-turn-in .4s ease-out both !important; }
