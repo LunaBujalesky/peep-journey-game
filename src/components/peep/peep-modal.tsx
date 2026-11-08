@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
-import leaf from "@/assets/boton-cerrar.svg.asset.json";
-import coin from "@/assets/moneda.svg.asset.json";
-import teaser from "@/assets/teaser-preview.png.asset.json";
+const leaf = { url: "/assets/boton-cerrar.svg" };
+const coin = { url: "/assets/moneda.svg" };
+const teaser = { url: "/assets/teaser-preview.png" };
 import { playCoinSound, playLeavesSound } from "@/lib/wood-sound";
 import type { PeepModal as Modal } from "@/lib/peep-media";
 import { TeamBook } from "./team-book";

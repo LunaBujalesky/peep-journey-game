@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import music from "@/assets/main-menu.mp3.asset.json";
+const music = { url: "/assets/main-menu.mp3" };
 import { shouldPlayMenuMusic, type PeepModal } from "@/lib/peep-media";
 
 // One player for the whole visit, so switching language keeps the song going.

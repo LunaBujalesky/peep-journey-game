@@ -1,13 +1,13 @@
 import { copy, type Locale } from "@/lib/i18n";
-import bosque from "@/assets/bosque.png.asset.json";
-import rosa from "@/assets/luz-rosa.png.asset.json";
-import polvo from "@/assets/polvo-capa.png.asset.json";
-import arboles from "@/assets/arboles.png.asset.json";
-import plataformasIzquierda from "@/assets/plataformas-izquierda.png.asset.json";
-import plataformasDerecha from "@/assets/plataformas-derecha.png.asset.json";
-import mochis from "@/assets/mochis.png.asset.json";
-import pepe from "@/assets/pepe.png.asset.json";
-import bandera from "@/assets/bandera.png.asset.json";
+const bosque = { url: "/assets/bosque.png" };
+const rosa = { url: "/assets/luz-rosa.png" };
+const polvo = { url: "/assets/polvo-capa.png" };
+const arboles = { url: "/assets/arboles.png" };
+const plataformasIzquierda = { url: "/assets/plataformas-izquierda.png" };
+const plataformasDerecha = { url: "/assets/plataformas-derecha.png" };
+const mochis = { url: "/assets/mochis.png" };
+const pepe = { url: "/assets/pepe.png" };
+const bandera = { url: "/assets/bandera.png" };
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { playWoodSound } from "@/lib/wood-sound";
@@ -15,14 +15,14 @@ import { TopControls } from "@/components/peep/top-controls";
 import { useMenuMusic } from "@/hooks/use-menu-music";
 import { PeepModal } from "@/components/peep/peep-modal";
 import type { PeepModal as Modal } from "@/lib/peep-media";
-import logo from "@/assets/peep-logo.svg.asset.json";
-import tryNow from "@/assets/try-now.png.asset.json";
-import instagram from "@/assets/instagram.png.asset.json";
-import steam from "@/assets/steam.png.asset.json";
-import discord from "@/assets/discord.png.asset.json";
-import teaserButton from "@/assets/teaser-button.png.asset.json";
-import presskitButton from "@/assets/presskit-button.png.asset.json";
-import teamButton from "@/assets/team-button.png.asset.json";
+const logo = { url: "/assets/peep-logo.svg" };
+const tryNow = { url: "/assets/try-now.png" };
+const instagram = { url: "/assets/instagram.png" };
+const steam = { url: "/assets/steam.png" };
+const discord = { url: "/assets/discord.png" };
+const teaserButton = { url: "/assets/teaser-button.png" };
+const presskitButton = { url: "/assets/presskit-button.png" };
+const teamButton = { url: "/assets/team-button.png" };
 
 
 // The intro plays once per page load; switching language skips it.
