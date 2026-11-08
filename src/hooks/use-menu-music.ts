@@ -1,31 +1,31 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import music from "@/assets/main-menu.mp3.asset.json";
 import { shouldPlayMenuMusic, type PeepModal } from "@/lib/peep-media";
 
-/** Load on the first gesture; keep one player alive across modal changes. */
+// One player for the whole visit, so switching language keeps the song going.
+let player: HTMLAudioElement | null = null;
+let musicEnabled = true;
+
+/** Load on the first gesture; pause for modals, hidden tabs or mute. */
 export function useMenuMusic(modal: PeepModal) {
-  const player = useRef<HTMLAudioElement | null>(null);
-  const [enabled, setEnabled] = useState(true);
-  const current = useRef({ modal, enabled });
-  useEffect(() => { current.current = { modal, enabled }; }, [modal, enabled]);
+  const [enabled, setEnabled] = useState(musicEnabled);
 
   useEffect(() => {
+    musicEnabled = enabled;
     const sync = () => {
-      const audio = player.current;
-      if (!audio) return;
-      if (shouldPlayMenuMusic(current.current.modal, current.current.enabled, !document.hidden)) {
-        void audio.play().catch(() => {});
-      } else audio.pause();
+      if (!player) return;
+      if (shouldPlayMenuMusic(modal, enabled, !document.hidden)) void player.play().catch(() => {});
+      else player.pause();
     };
     const unlock = () => {
-      if (!player.current) {
-        const audio = new Audio(music.url);
-        audio.loop = true;
-        audio.volume = 0.3;
-        player.current = audio;
+      if (!player) {
+        player = new Audio(music.url);
+        player.loop = true;
+        player.volume = 0.3;
       }
       sync();
     };
+    sync();
     document.addEventListener("pointerdown", unlock);
     document.addEventListener("keydown", unlock);
     document.addEventListener("visibilitychange", sync);
@@ -33,16 +33,8 @@ export function useMenuMusic(modal: PeepModal) {
       document.removeEventListener("pointerdown", unlock);
       document.removeEventListener("keydown", unlock);
       document.removeEventListener("visibilitychange", sync);
-      player.current?.pause();
-      player.current = null;
     };
-  }, []);
-
-  useEffect(() => {
-    const audio = player.current;
-    if (!audio) return;
-    if (shouldPlayMenuMusic(modal, enabled, !document.hidden)) void audio.play().catch(() => {});
-    else audio.pause();
   }, [modal, enabled]);
+
   return { enabled, toggle: () => setEnabled(value => !value) };
 }

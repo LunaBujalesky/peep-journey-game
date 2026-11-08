@@ -212,7 +212,23 @@
 .team-card-silvi { left: 53.4%; top: 7.2%; }
 .team-card-aye { left: 64.8%; top: 7.4%; }
 .team-card:hover, .team-card:focus-visible { z-index: 2; animation: card-swing 1.7s ease-in-out infinite; }
-.music-toggle { position: absolute; right: 16px; bottom: 16px; z-index: 2; color: var(--button-stroke); background: var(--peep-cream); border: 1px solid var(--button-stroke); }
+.top-controls { position: absolute; top: 14px; right: 16px; z-index: 3; display: flex; align-items: center; gap: 8px; }
+.sound-button { width: 52px; height: 52px; }
+.sound-button:hover img { transform: scale(.92); }
+.language-leaf { position: relative; width: 74px; height: 82px; perspective: 400px; }
+.language-leaf img, .language-leaf span { transform-origin: 20% 80%; }
+.language-leaf span { position: absolute; left: 46%; top: 59%; transform: translate(-50%,-50%); font-family: "Patrick Hand", cursive; font-weight: 400; font-size: 22px; line-height: 1; color: var(--peep-cream, #EFEADD); pointer-events: none; white-space: nowrap; }
+.language-leaf:hover img { animation: wiggle .5s ease-in-out infinite; }
+.leaf-out img, .leaf-out span { animation: leaf-turn-out .28s ease-in forwards !important; }
+.leaf-in img, .leaf-in span { animation: leaf-turn-in .4s ease-out both !important; }
+@keyframes leaf-turn-out { to { transform: rotateY(90deg) rotate(-12deg); opacity: .4; } }
+@keyframes leaf-turn-in { from { transform: rotateY(-90deg) rotate(12deg); opacity: .4; } to { transform: none; opacity: 1; } }
+.language-leaf span { transform: translate(-50%,-50%); }
+.intro-done .layer-forest, .intro-done .layer-particles, .intro-done .layer-trees, .intro-done .layer-platforms, .intro-done .logo, .intro-done .menu-row { animation: none; clip-path: none; opacity: 1; transform: none; }
+.intro-done .layer-pink { animation: none; opacity: .55; transform: none; filter: none; }
+.intro-done .layer-mochis { opacity: 1; animation: breathe 4.5s ease-in-out infinite; }
+.intro-done .pepe-bird { opacity: 1; animation: sway 3.2s ease-in-out infinite; }
+.intro-done .bandera-flag { opacity: 1; animation: wave 2.6s ease-in-out infinite; }
 .close-leaf img { display: block; width: 100%; height: auto; pointer-events: none; }
 .close-leaf:hover img, .close-leaf:focus-visible img { animation: wiggle .5s ease-in-out infinite; }
 .close-leaf:focus-visible { outline: 2px solid var(--button-stroke); outline-offset: 4px; border-radius: 8px; }
