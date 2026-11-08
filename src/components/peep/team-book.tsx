@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
-import book from "@/assets/team-book.webp.asset.json";
-import diego from "@/assets/team-diego-clean.webp.asset.json";
-import clara from "@/assets/team-clara-clean.webp.asset.json";
-import luna from "@/assets/team-luna-clean.webp.asset.json";
-import silvi from "@/assets/team-silvi-clean.webp.asset.json";
-import aye from "@/assets/team-aye-clean.webp.asset.json";
+const book = { url: "/assets/team-book.webp" };
+const diego = { url: "/assets/team-diego-clean.webp" };
+const clara = { url: "/assets/team-clara-clean.webp" };
+const luna = { url: "/assets/team-luna-clean.webp" };
+const silvi = { url: "/assets/team-silvi-clean.webp" };
+const aye = { url: "/assets/team-aye-clean.webp" };
 import { teamProfiles } from "@/lib/peep-media";
 import { playPlasticSound } from "@/lib/wood-sound";
 

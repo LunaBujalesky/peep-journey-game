@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import bosque from "@/assets/bosque.png.asset.json";
+const bosque = { url: "/assets/bosque.png" };
 import { localeHead } from "@/lib/i18n";
 import { PeepHome } from "@/components/peep/peep-home";
 

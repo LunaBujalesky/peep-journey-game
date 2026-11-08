@@ -3,9 +3,9 @@ import { useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { locales, localePath, type Copy, type Locale } from "@/lib/i18n";
 import { playLeavesSound, playWoodSound } from "@/lib/wood-sound";
-import leaf from "@/assets/language-leaf.webp.asset.json";
-import soundOn from "@/assets/sound-on.webp.asset.json";
-import soundOff from "@/assets/sound-off.webp.asset.json";
+const leaf = { url: "/assets/language-leaf.webp" };
+const soundOn = { url: "/assets/sound-on.webp" };
+const soundOff = { url: "/assets/sound-off.webp" };
 
 const label: Record<Locale, string> = { es: "Esp", en: "En", "zh-Hans": "中文", ko: "한국어" };
 // Set while the leaf is mid-turn so the next language page finishes the page-turn.
