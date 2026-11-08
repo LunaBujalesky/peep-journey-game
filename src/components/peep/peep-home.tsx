@@ -8,10 +8,10 @@ import plataformasDerecha from "@/assets/plataformas-derecha.png.asset.json";
 import mochis from "@/assets/mochis.png.asset.json";
 import pepe from "@/assets/pepe.png.asset.json";
 import bandera from "@/assets/bandera.png.asset.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { playWoodSound } from "@/lib/wood-sound";
-import { Volume2, VolumeX } from "lucide-react";
+import { TopControls } from "@/components/peep/top-controls";
 import { useMenuMusic } from "@/hooks/use-menu-music";
 import { PeepModal } from "@/components/peep/peep-modal";
 import type { PeepModal as Modal } from "@/lib/peep-media";
@@ -25,13 +25,18 @@ import presskitButton from "@/assets/presskit-button.png.asset.json";
 import teamButton from "@/assets/team-button.png.asset.json";
 
 
+// The intro plays once per page load; switching language skips it.
+let introPlayed = false;
+
 export function PeepHome({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const [modal, setModal] = useState<Modal>(null);
   const music = useMenuMusic(modal);
+  const introDone = useState(() => introPlayed)[0];
+  useEffect(() => { introPlayed = true; }, []);
   const soundEvents = { onPointerEnter: playWoodSound, onFocus: playWoodSound, onPointerDown: playWoodSound };
   return (
-    <main className="scene" lang={locale}>
+    <main className={introDone ? "scene intro-done" : "scene"} lang={locale}>
       <img src={bosque.url} alt="" className="layer layer-forest" />
       <img src={rosa.url} alt="" className="layer layer-pink" />
       <div className="layer layer-particles">
@@ -43,7 +48,7 @@ export function PeepHome({ locale }: { locale: Locale }) {
         <img src={plataformasDerecha.url} alt="" className="layer" />
       </div>
       <img src={mochis.url} alt="" className="layer layer-mochis" />
-      <Button variant="ghost" size="icon" className="music-toggle" aria-label={music.enabled ? t.musicOff : t.musicOn} title={music.enabled ? t.musicOff : t.musicOn} aria-pressed={music.enabled} onClick={music.toggle}>{music.enabled ? <Volume2 /> : <VolumeX />}</Button>
+      <TopControls locale={locale} t={t} music={music} />
 
       <div className="hero">
         <div className="logo-wrap">
