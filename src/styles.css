@@ -212,7 +212,7 @@
 .team-card-silvi { left: 53.4%; top: 7.2%; }
 .team-card-aye { left: 64.8%; top: 7.4%; }
 .team-card:hover, .team-card:focus-visible { z-index: 2; animation: card-swing 1.7s ease-in-out infinite; }
-.top-controls { position: absolute; top: 14px; right: 16px; z-index: 3; display: flex; align-items: center; gap: 8px; }
+.top-controls { position: absolute; top: 14px; right: 16px; z-index: 20; display: flex; align-items: center; gap: 8px; }
 .sound-button { width: 52px; height: 52px; }
 .sound-button:hover img { transform: scale(.92); }
 .language-leaf { position: relative; width: 74px; height: 82px; perspective: 400px; }
