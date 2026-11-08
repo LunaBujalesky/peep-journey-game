@@ -16,7 +16,7 @@ export function TopControls({ locale, t, music }: { locale: Locale; t: Copy; mus
   const navigate = useNavigate();
   const [phase, setPhase] = useState<"idle" | "out" | "in">(() => (turning ? "in" : "idle"));
   useEffect(() => { turning = false; }, []);
-  const next = locales[(locales.indexOf(locale) + 1) % locales.length];
+  const next: Locale = locales[(locales.indexOf(locale) + 1) % locales.length] ?? "es";
 
   const switchLanguage = () => {
     if (phase === "out") return;
